@@ -1,0 +1,242 @@
+{
+  "empresa": "ManutControl",
+  "usuario": "Fernanda Matsudo",
+  "equipamentos": [
+    {
+      "id": 1,
+      "codigo": "MTR-020",
+      "nome": "Motor 20 CV - Bomba de Recalque 2",
+      "setor": "Bombas",
+      "status": "parado",
+      "ultimaManutencao": "2026-08-02",
+      "criticidade": "alta"
+    },
+    {
+      "id": 2,
+      "codigo": "PRE-015",
+      "nome": "Prensa Hidráulica 15T",
+      "setor": "Prensas",
+      "status": "em manutencao",
+      "ultimaManutencao": "2026-07-28",
+      "criticidade": "alta"
+    },
+    {
+      "id": 3,
+      "codigo": "CPR-101",
+      "nome": "Compressor de Ar 101",
+      "setor": "Utilidades",
+      "status": "atencao",
+      "ultimaManutencao": "2026-08-09",
+      "criticidade": "media"
+    },
+    {
+      "id": 4,
+      "codigo": "QDE-007",
+      "nome": "Quadro Elétrico Linha 01",
+      "setor": "Elétrica",
+      "status": "operando",
+      "ultimaManutencao": "2026-07-14",
+      "criticidade": "alta"
+    },
+    {
+      "id": 5,
+      "codigo": "EST-003",
+      "nome": "Esteira Transportadora 03",
+      "setor": "Expedição",
+      "status": "operando",
+      "ultimaManutencao": "2026-08-05",
+      "criticidade": "media"
+    },
+    {
+      "id": 6,
+      "codigo": "ROB-012",
+      "nome": "Robô de Solda 12",
+      "setor": "Soldagem",
+      "status": "parado",
+      "ultimaManutencao": "2026-06-30",
+      "criticidade": "alta"
+    },
+    {
+      "id": 7,
+      "codigo": "TRN-004",
+      "nome": "Torno CNC 04",
+      "setor": "Usinagem",
+      "status": "operando",
+      "ultimaManutencao": "2026-08-01",
+      "criticidade": "media"
+    },
+    {
+      "id": 8,
+      "codigo": "FRE-009",
+      "nome": "Fresadora CNC 09",
+      "setor": "Usinagem",
+      "status": "em manutencao",
+      "ultimaManutencao": "2026-08-12",
+      "criticidade": "media"
+    },
+    {
+      "id": 9,
+      "codigo": "FOR-002",
+      "nome": "Forno Industrial 02",
+      "setor": "Tratamento Térmico",
+      "status": "operando",
+      "ultimaManutencao": "2026-07-22",
+      "criticidade": "alta"
+    },
+    {
+      "id": 10,
+      "codigo": "EXA-006",
+      "nome": "Exaustor Industrial 06",
+      "setor": "Pintura",
+      "status": "atencao",
+      "ultimaManutencao": "2026-07-10",
+      "criticidade": "baixa"
+    }
+  ],
+  "ordensServico": [
+    {
+      "id": 847,
+      "codigo": "OS-2026-0847",
+      "descricao": "Trocar rolamento do motor",
+      "equipamentoId": 1,
+      "tipo": "corretiva",
+      "prioridade": "urgente",
+      "tecnico": "João Pereira",
+      "vencimento": "2026-08-17",
+      "status": "vencida",
+      "horarioAgendado": "08:00"
+    },
+    {
+      "id": 853,
+      "codigo": "OS-2026-0853",
+      "descricao": "Inspecionar vazamento hidráulico",
+      "equipamentoId": 2,
+      "tipo": "corretiva",
+      "prioridade": "alta",
+      "tecnico": "André Costa",
+      "vencimento": "2026-08-18",
+      "status": "em andamento",
+      "horarioAgendado": "10:30"
+    },
+    {
+      "id": 861,
+      "codigo": "OS-2026-0861",
+      "descricao": "Revisar quadro elétrico",
+      "equipamentoId": 4,
+      "tipo": "preventiva",
+      "prioridade": "media",
+      "tecnico": "Marcos Lima",
+      "vencimento": "2026-08-19",
+      "status": "aberta",
+      "horarioAgendado": "14:00"
+    },
+    {
+      "id": 865,
+      "codigo": "OS-2026-0865",
+      "descricao": "Lubrificação da esteira",
+      "equipamentoId": 5,
+      "tipo": "preventiva",
+      "prioridade": "media",
+      "tecnico": "Fábio Lopes",
+      "vencimento": "2026-08-20",
+      "status": "aberta",
+      "horarioAgendado": "15:30"
+    },
+    {
+      "id": 868,
+      "codigo": "OS-2026-0868",
+      "descricao": "Calibrar sensor de pressão",
+      "equipamentoId": 3,
+      "tipo": "preditiva",
+      "prioridade": "baixa",
+      "tecnico": "Rafael Almeida",
+      "vencimento": "2026-08-21",
+      "status": "aberta",
+      "horarioAgendado": null
+    },
+    {
+      "id": 872,
+      "codigo": "OS-2026-0872",
+      "descricao": "Substituir cabo do servo motor",
+      "equipamentoId": 6,
+      "tipo": "corretiva",
+      "prioridade": "urgente",
+      "tecnico": "Carla Mendes",
+      "vencimento": "2026-08-16",
+      "status": "vencida",
+      "horarioAgendado": "09:15"
+    },
+    {
+      "id": 875,
+      "codigo": "OS-2026-0875",
+      "descricao": "Verificar alinhamento do eixo",
+      "equipamentoId": 8,
+      "tipo": "corretiva",
+      "prioridade": "alta",
+      "tecnico": "João Pereira",
+      "vencimento": "2026-08-18",
+      "status": "em andamento",
+      "horarioAgendado": "13:00"
+    },
+    {
+      "id": 879,
+      "codigo": "OS-2026-0879",
+      "descricao": "Inspecionar proteções térmicas",
+      "equipamentoId": 9,
+      "tipo": "preventiva",
+      "prioridade": "media",
+      "tecnico": "Marcos Lima",
+      "vencimento": "2026-08-22",
+      "status": "aberta",
+      "horarioAgendado": null
+    },
+    {
+      "id": 882,
+      "codigo": "OS-2026-0882",
+      "descricao": "Limpar filtros do exaustor",
+      "equipamentoId": 10,
+      "tipo": "preventiva",
+      "prioridade": "baixa",
+      "tecnico": "Fábio Lopes",
+      "vencimento": "2026-08-23",
+      "status": "aberta",
+      "horarioAgendado": null
+    },
+    {
+      "id": 886,
+      "codigo": "OS-2026-0886",
+      "descricao": "Analisar vibração do spindle",
+      "equipamentoId": 7,
+      "tipo": "preditiva",
+      "prioridade": "alta",
+      "tecnico": "Carla Mendes",
+      "vencimento": "2026-08-24",
+      "status": "aberta",
+      "horarioAgendado": null
+    },
+    {
+      "id": 889,
+      "codigo": "OS-2026-0889",
+      "descricao": "Trocar óleo do sistema hidráulico",
+      "equipamentoId": 2,
+      "tipo": "preventiva",
+      "prioridade": "media",
+      "tecnico": "André Costa",
+      "vencimento": "2026-08-26",
+      "status": "planejada",
+      "horarioAgendado": null
+    },
+    {
+      "id": 893,
+      "codigo": "OS-2026-0893",
+      "descricao": "Reapertar conexões elétricas",
+      "equipamentoId": 4,
+      "tipo": "preventiva",
+      "prioridade": "baixa",
+      "tecnico": "Rafael Almeida",
+      "vencimento": "2026-08-28",
+      "status": "concluida",
+      "horarioAgendado": null
+    }
+  ]
+}
