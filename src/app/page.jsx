@@ -1,20 +1,8 @@
 "use client";
 
 import dados from "../../manutcontrol_dados.json";
-
 import { useState } from "react";
-
-import {
-  NotepadText,
-  ClockAlert,
-  CirclePause,
-  CalendarDays,
-  Clock,
-  MapPin,
-  UserRound,
-  ChevronRight,
-} from "lucide-react";
-
+import { NotepadText, ClockAlert, CirclePause, CalendarDays, Clock, MapPin, UserRound, ChevronRight } from "lucide-react";
 import Header from "./components/Header";
 
 export default function Home() {
@@ -23,17 +11,9 @@ export default function Home() {
   const [filtroStatus, setFiltroStatus] = useState("");
   const [filtroPrioridade, setFiltroPrioridade] = useState("");
 
-
-  // =========================================================
-  // FILTROS
-  // =========================================================
-
   const ordensFiltradas = dados.ordensServico.filter((ordem) => {
 
-    const equipamento = dados.equipamentos.find(
-      (equipamento) =>
-        equipamento.id === ordem.equipamentoId
-    );
+    const equipamento = dados.equipamentos.find((equipamento) =>equipamento.id === ordem.equipamentoId);
 
     const textoBusca = busca.toLowerCase();
 
@@ -58,228 +38,70 @@ export default function Home() {
         .toLowerCase()
         .includes(textoBusca);
 
+    const correspondeStatus = filtroStatus === "" || ordem.status === filtroStatus;
+    const correspondePrioridade = filtroPrioridade === "" || ordem.prioridade === filtroPrioridade;
 
-    const correspondeStatus =
-      filtroStatus === "" ||
-      ordem.status === filtroStatus;
-
-
-    const correspondePrioridade =
-      filtroPrioridade === "" ||
-      ordem.prioridade === filtroPrioridade;
-
-
-    return (
-      correspondeBusca &&
-      correspondeStatus &&
-      correspondePrioridade
-    );
+    return ( correspondeBusca && correspondeStatus && correspondePrioridade);
 
   });
 
+  const agendaHoje = dados.ordensServico.filter((ordem) => ordem.horarioAgendado).sort((a, b) => a.horarioAgendado.localeCompare(b.horarioAgendado));
 
-  // =========================================================
-  // AGENDA
-  // =========================================================
-
-  const agendaHoje = dados.ordensServico
-    .filter(
-      (ordem) => ordem.horarioAgendado
-    )
-    .sort(
-      (a, b) =>
-        a.horarioAgendado.localeCompare(
-          b.horarioAgendado
-        )
-    );
-
-
-  // =========================================================
-  // EQUIPAMENTOS CRÍTICOS
-  // =========================================================
-  // Agora aparecem TODOS os equipamentos
-  // cuja criticidade é "alta", independentemente
-  // do status.
-
-  const equipamentosCriticos =
-    dados.equipamentos.filter(
-      (equipamento) =>
-        equipamento.criticidade === "alta"
-    );
-
-
-  // =========================================================
-  // ENCONTRAR EQUIPAMENTO
-  // =========================================================
+  const equipamentosCriticos = dados.equipamentos.filter((equipamento) =>equipamento.criticidade === "alta");
 
   const encontrarEquipamento = (id) => {
-
-    return dados.equipamentos.find(
-      (equipamento) =>
-        equipamento.id === id
-    );
-
+    return dados.equipamentos.find((equipamento) => equipamento.id === id);
   };
-
-
-  // =========================================================
-  // FORMATAR STATUS
-  // =========================================================
 
   const formatarStatus = (status) => {
 
     const statusMap = {
-
       vencida: "Vencida",
-
       "em andamento": "Em andamento",
-
       aberta: "Aberta",
-
       planejada: "Planejada",
-
       concluida: "Concluída",
-
     };
 
     return statusMap[status] || status;
 
   };
-
-
-  // =========================================================
-  // STATUS DA AGENDA
-  // =========================================================
 
   const statusAgendaClasses = (status) => {
-
-    if (status === "vencida") {
-
-      return "bg-red-100 text-red-700 border-red-200";
-
-    }
-
-    if (status === "em andamento") {
-
-      return "bg-blue-100 text-blue-700 border-blue-200";
-
-    }
-
-    if (status === "aberta") {
-
-      return "bg-yellow-100 text-yellow-700 border-yellow-200";
-
-    }
-
-    if (status === "planejada") {
-
-      return "bg-gray-100 text-gray-700 border-gray-200";
-
-    }
-
-    if (status === "concluida") {
-
-      return "bg-green-100 text-green-700 border-green-200";
-
-    }
-
+    if (status === "vencida") {return "bg-red-100 text-red-700 border-red-200";}
+    if (status === "em andamento") {return "bg-blue-100 text-blue-700 border-blue-200";}
+    if (status === "aberta") {return "bg-yellow-100 text-yellow-700 border-yellow-200";}
+    if (status === "planejada") {return "bg-gray-100 text-gray-700 border-gray-200";}
+    if (status === "concluida") {return "bg-green-100 text-green-700 border-green-200";}
     return "bg-gray-100 text-gray-700 border-gray-200";
-
   };
-
-
-  // =========================================================
-  // STATUS DOS EQUIPAMENTOS
-  // =========================================================
 
   const statusEquipamentoClasses = (status) => {
-
-    if (status === "parado") {
-
-      return "bg-red-100 border-red-200 text-red-700";
-
-    }
-
-    if (status === "em manutencao") {
-
-      return "bg-blue-100 border-blue-200 text-blue-700";
-
-    }
-
-    if (status === "atencao") {
-
-      return "bg-yellow-100 border-yellow-200 text-yellow-700";
-
-    }
-
-    if (status === "operando") {
-
-      return "bg-green-100 border-green-200 text-green-700";
-
-    }
-
+    if (status === "parado") {return "bg-red-100 border-red-200 text-red-700";}
+    if (status === "em manutencao") {return "bg-blue-100 border-blue-200 text-blue-700";}
+    if (status === "atencao") {return "bg-yellow-100 border-yellow-200 text-yellow-700";}
+    if (status === "operando") {return "bg-green-100 border-green-200 text-green-700";}
     return "bg-gray-100 border-gray-200 text-gray-700";
-
   };
 
-
-  // =========================================================
-  // STATUS DOS EQUIPAMENTOS - TEXTO
-  // =========================================================
-
   const formatarStatusEquipamento = (status) => {
-
     const statusMap = {
-
       parado: "Parado",
-
       "em manutencao": "Em manutenção",
-
       atencao: "Atenção",
-
       operando: "Operando",
-
     };
 
     return statusMap[status] || status;
-
   };
-
-
-  // =========================================================
-  // PRIORIDADE
-  // =========================================================
 
   const prioridadeClasses = (prioridade) => {
-
-    if (prioridade === "urgente") {
-
-      return "bg-red-100 text-red-700";
-
-    }
-
-    if (prioridade === "alta") {
-
-      return "bg-orange-100 text-orange-700";
-
-    }
-
-    if (prioridade === "media") {
-
-      return "bg-yellow-100 text-yellow-700";
-
-    }
-
-    if (prioridade === "baixa") {
-
-      return "bg-green-100 text-green-700";
-
-    }
-
+    if (prioridade === "urgente") {return "bg-red-100 text-red-700";}
+    if (prioridade === "alta") {return "bg-orange-100 text-orange-700";}
+    if (prioridade === "media") {return "bg-yellow-100 text-yellow-700";}
+    if (prioridade === "baixa") {return "bg-green-100 text-green-700";}
     return "bg-gray-100 text-gray-700";
-
   };
-
 
   return (
 
@@ -287,65 +109,19 @@ export default function Home() {
 
       <Header />
 
-
-      {/* =====================================================
-          CONTAINER DA PÁGINA
-      ===================================================== */}
-
       <div className="bg-white text-black px-6 md:px-10 xl:px-12 py-8 w-full min-h-screen">
-
-
-        {/* =====================================================
-            INTRODUÇÃO
-        ===================================================== */}
 
         <div className="flex flex-col gap-2 pb-10">
 
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
 
             <div>
-
-              <h1 className="text-amarelo-medio text-3xl md:text-4xl">
-
-                Bom dia,{" "}
-
-                <strong>
-                  {dados.usuario}
-                </strong>
-
-                !
-
-              </h1>
-
-
-              <p className="mt-2 text-gray-600">
-
-                Veja o que precisa de atenção hoje!
-
-              </p>
-
+              <h1 className="text-amarelo-medio text-3xl md:text-4xl">Bom dia,{" "}<strong>{dados.usuario}</strong>!</h1>
+              <p className="mt-2 text-gray-600">Veja o que precisa de atenção hoje!</p>
             </div>
 
-
-            <button
-              type="button"
-              className="
-                bg-amarelo-claro
-                font-bold
-                px-5
-                py-3
-                border
-                border-amarelo-medio
-                rounded-xl
-                cursor-pointer
-                hover:opacity-80
-                transition
-                w-fit
-              "
-            >
-
+            <button type="button" className="bg-amarelo-claro font-bold px-5 py-3 border border-amarelo-medio rounded-xl cursor-pointer hover:opacity-80 transition w-fit">
               + Nova Ordem
-
             </button>
 
           </div>
@@ -353,212 +129,44 @@ export default function Home() {
         </div>
 
 
-
-        {/* =====================================================
-            CARDS DE RESUMO
-        ===================================================== */}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
 
-
-          {/* ORDENS ABERTAS */}
-
-          <div
-            className="
-              border
-              rounded-2xl
-              border-cinza
-              p-6
-              flex-1
-              hover:shadow-md
-              transition
-              bg-white
-            "
-          >
+          <div className="border rounded-2xl border-cinza p-6 flex-1 hover:shadow-md transition bg-white">
 
             <p className="text-lg flex items-center gap-3">
-
-              <NotepadText
-                className="
-                  bg-blue-300
-                  w-14
-                  h-14
-                  p-3
-                  rounded-2xl
-                  border
-                  border-blue-900
-                  text-blue-900
-                "
-              />
-
-              <span className="text-2xl text-blue-900 font-semibold">
-
-                {
-                  dados.ordensServico.filter(
-                    (ordem) =>
-                      ordem.status === "aberta"
-                  ).length
-                }
-
-              </span>
-
-              <span>
-                Ordens abertas
-              </span>
-
+              <NotepadText className="bg-blue-300 w-14 h-14 p-3 rounded-2xl border border-blue-900 text-blue-900"/>
+              <span className="text-2xl text-blue-900 font-semibold">{dados.ordensServico.filter((ordem) => ordem.status === "aberta").length}</span>
+              <span>Ordens abertas</span>
             </p>
 
           </div>
 
-
-
-          {/* VENCIDAS */}
-
-          <div
-            className="
-              border
-              rounded-2xl
-              border-cinza
-              p-6
-              flex-1
-              hover:shadow-md
-              transition
-              bg-white
-            "
-          >
+          <div className="border rounded-2xl border-cinza p-6 flex-1 hover:shadow-md transition bg-white">
 
             <p className="text-lg flex items-center gap-3">
-
-              <ClockAlert
-                className="
-                  bg-red-300
-                  w-14
-                  h-14
-                  p-3
-                  rounded-2xl
-                  border
-                  border-red-900
-                  text-red-900
-                "
-              />
-
-              <span className="text-2xl text-red-900 font-semibold">
-
-                {
-                  dados.ordensServico.filter(
-                    (ordem) =>
-                      ordem.status === "vencida"
-                  ).length
-                }
-
-              </span>
-
-              <span>
-                Vencidas
-              </span>
-
+              <ClockAlert className="bg-red-300 w-14 h-14 p-3 rounded-2xl border border-red-900 text-red-900"/>
+              <span className="text-2xl text-red-900 font-semibold">{dados.ordensServico.filter((ordem) => ordem.status === "vencida").length}</span>
+              <span>Vencidas</span>
             </p>
 
           </div>
 
-
-
-          {/* EQUIPAMENTOS PARADOS */}
-
-          <div
-            className="
-              border
-              rounded-2xl
-              border-cinza
-              p-6
-              flex-1
-              hover:shadow-md
-              transition
-              bg-white
-            "
-          >
+          <div className="border rounded-2xl border-cinza p-6 flex-1 hover:shadow-md transition bg-white">
 
             <p className="text-lg flex items-center gap-3">
-
-              <CirclePause
-                className="
-                  bg-yellow-200
-                  w-14
-                  h-14
-                  p-3
-                  rounded-2xl
-                  border
-                  border-yellow-600
-                  text-yellow-600
-                "
-              />
-
-              <span className="text-2xl text-yellow-600 font-semibold">
-
-                {
-                  dados.equipamentos.filter(
-                    (equipamento) =>
-                      equipamento.status === "parado"
-                  ).length
-                }
-
-              </span>
-
-              <span>
-                Equipamentos parados
-              </span>
-
+              <CirclePause className="bg-yellow-200 w-14 h-14 p-3 rounded-2xl border border-yellow-600 text-yellow-600"/>
+              <span className="text-2xl text-yellow-600 font-semibold">{dados.equipamentos.filter((equipamento) => equipamento.status === "parado").length}</span>
+              <span>Equipamentos parados</span>
             </p>
 
           </div>
 
-
-
-          {/* CONCLUÍDAS */}
-
-          <div
-            className="
-              border
-              rounded-2xl
-              border-cinza
-              p-6
-              flex-1
-              hover:shadow-md
-              transition
-              bg-white
-            "
-          >
+          <div className="border rounded-2xl border-cinza p-6 flex-1 hover:shadow-md transition bg-white">
 
             <p className="text-lg flex items-center gap-3">
-
-              <CirclePause
-                className="
-                  bg-green-200
-                  w-14
-                  h-14
-                  p-3
-                  rounded-2xl
-                  border
-                  border-green-600
-                  text-green-600
-                "
-              />
-
-              <span className="text-2xl text-green-600 font-semibold">
-
-                {
-                  dados.ordensServico.filter(
-                    (ordem) =>
-                      ordem.status === "concluida"
-                  ).length
-                }
-
-              </span>
-
-              <span>
-                Concluídas
-              </span>
-
+              <CirclePause className="bg-green-200 w-14 h-14 p-3 rounded-2xl border border-green-600 text-green-600"/>
+              <span className="text-2xl text-green-600 font-semibold">{dados.ordensServico.filter((ordem) => ordem.status === "concluida").length}</span>
+              <span>Concluídas</span>
             </p>
 
           </div>
@@ -566,70 +174,18 @@ export default function Home() {
         </div>
 
 
-
-        {/* =====================================================
-            1. TABELA
-        ===================================================== */}
-
-        <div
-          className="
-            border
-            border-cinza
-            rounded-2xl
-            mt-10
-            p-6
-            md:p-8
-            bg-white
-            shadow-sm
-          "
-        >
+        <div className=" border border-cinza rounded-2xl mt-10 p-6 md:p-8 bg-white shadow-sm">
 
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
 
             <div>
-
-              <h2 className="font-bold text-2xl tracking-wide">
-
-                Ordens que exigem atenção
-
-              </h2>
-
-              <p className="text-sm text-gray-500 mt-1">
-
-                Consulte e filtre as ordens de serviço.
-
-              </p>
-
+              <h2 className="font-bold text-2xl tracking-wide">Ordens que exigem atenção</h2>
+              <p className="text-sm text-gray-500 mt-1">Consulte e filtre as ordens de serviço.</p>
             </div>
 
-
-            <span
-              className="
-                bg-gray-100
-                border
-                border-gray-200
-                px-4
-                py-2
-                rounded-full
-                text-sm
-                font-semibold
-                text-gray-700
-                w-fit
-              "
-            >
-
-              {ordensFiltradas.length}{" "}
-
-              {
-                ordensFiltradas.length === 1
-                  ? "ordem"
-                  : "ordens"
-              }
-
-            </span>
+            <span className="bg-gray-100 border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold text-gray-700 w-fit">{ordensFiltradas.length}{" "}{ordensFiltradas.length === 1 ? "ordem" : "ordens"}</span>
 
           </div>
-
 
 
           {/* FILTROS */}
@@ -741,8 +297,6 @@ export default function Home() {
           </div>
 
 
-
-          {/* TABELA */}
 
           <div className="mt-8 overflow-x-auto">
 
@@ -964,12 +518,6 @@ export default function Home() {
           </div>
 
         </div>
-
-
-
-        {/* =====================================================
-            2. AGENDA DE HOJE
-        ===================================================== */}
 
         <div
           className="
@@ -1299,12 +847,6 @@ export default function Home() {
           )}
 
         </div>
-
-
-
-        {/* =====================================================
-            3. EQUIPAMENTOS CRÍTICOS
-        ===================================================== */}
 
         <div
           className="
